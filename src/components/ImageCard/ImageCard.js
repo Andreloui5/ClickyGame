@@ -1,20 +1,23 @@
-import React from 'react'
-import { Card, Col } from 'antd';
-import 'antd/dist/antd.css';
+import React, { useState } from 'react';
+import { Card } from 'react-bootstrap';
+import "./style.css"
 
-function ImgCard(props) {
+
+export function ImageCard({image}) {
+  const [hovered, setHovered] = useState(false);
+  const toggleHover = () => setHovered(!hovered); 
+
 
   return (
-    <Col
-    s={6}
-    >
-    <Card
-      key={props.id}
-      hoverable
-      style={{ width: 240 }}
-      cover={<img alt={props.alt} src={props.src} />}
-    />
-    </Col>
-)
-};
-export default ImgCard;
+    <Card style={{float:'left'}}>
+      <Card.Img 
+      className={hovered ? 'img-container shadow-lg' : 'img-container'}
+      onMouseEnter={toggleHover}
+      onMouseLeave={toggleHover} 
+      // onClick={image.handleclick}
+      src={image || "https://placehold.it/300x300"} />
+    </Card>
+  );
+}
+
+export default ImageCard;
